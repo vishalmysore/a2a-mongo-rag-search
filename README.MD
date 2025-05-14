@@ -18,6 +18,9 @@ This project demonstrates how to build a powerful **Retrieval-Augmented Generati
 - **Protocol**: Google A2A (Agent-to-Agent)
 - **Search**: Vector-based semantic search
 - **API Documentation**: OpenAPI/Swagger
+
+![Architecture](architecture.png)  
+
 ## 📝 How It Works
 
 ### Vector Storage Integration
