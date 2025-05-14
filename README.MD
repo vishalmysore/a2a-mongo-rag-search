@@ -1,40 +1,103 @@
-# RAG with Spring, Java, and MongoDB Atlas
+# 🤖 Google A2A RAG with Spring, Java, and MongoDB Atlas
 
-This project demonstrates how to build a **Retrieval-Augmented Generation (RAG)** search application using **Spring Java** and **MongoDB Atlas**. The application stores and queries data using MongoDB's vector store for semantic search. It exposes REST APIs that allow users to add and search for recipes, but the architecture can easily be adapted to a variety of use cases.
+This project demonstrates how to build a powerful **Retrieval-Augmented Generation (RAG)** search application that integrates Google's Agent-to-Agent (A2A) protocol with Spring Boot and MongoDB Atlas. The system enables intelligent task management and semantic search capabilities through vector embeddings.
 
-## Features
+## 🌟 Key Features
 
-- **Add Recipe**: Allows users to add new recipes to the vector store using the `addRecipe` REST API.
-- **Search Recipes**: Users can search for similar recipes using the `getRecipe` REST API.
-- **MongoDB Atlas Integration**: The project uses MongoDB Atlas for storing vectorized data and performing semantic search operations.
-- **Scalable Architecture**: The architecture is flexible and can be extended to other domains such as book search, movie recommendations, and more.
+- **A2A Protocol Integration**: Seamless communication between AI agents
+- **Vector-Based Search**: Powered by MongoDB Atlas for semantic task retrieval
+- **Real-time Task Storage**: Automatic storage of A2A tasks in vector database
+- **RESTful API**: Easy-to-use endpoints for task management
+- **Spring Boot Framework**: Built with enterprise-grade Java technology
+- **Extensible Architecture**: Adaptable for various use cases
 
-## Technologies Used
+## 🛠️ Technology Stack
 
-- **Spring Boot**: Framework for building the back-end REST API.
-- **MongoDB Atlas**: Cloud-based NoSQL database to store vectorized data and perform semantic search.
-- **Java**: Core programming language used for application development.
-- **Vector Search**: MongoDB is used for storing high-dimensional vectors and performing similarity search.
+- **Backend**: Spring Boot 3.x
+- **Database**: MongoDB Atlas with Vector Search
+- **Protocol**: Google A2A (Agent-to-Agent)
+- **Search**: Vector-based semantic search
+- **API Documentation**: OpenAPI/Swagger
+## 📝 How It Works
 
-## Getting Started
+### Vector Storage Integration
 
-### Prerequisites
+The system automatically stores A2A tasks in MongoDB's vector store through a preprocessing hook:
 
-- **MongoDB Atlas**: You need a MongoDB Atlas account to set up your cloud database.
-- **Java**: Make sure you have Java 8 or higher installed.
-- **Spring Boot**: The project is built with Spring Boot, so ensure you have it set up locally or use Spring Initializr to create a new Spring Boot project.
+```java
+@Override
+public void preProcessing(String method, Object params) {
+    vectorService.ragStorage(method, params);
+}
+```
 
-### Setting up the Database
+### Task Management
 
-1. Create a MongoDB Atlas cluster and get the connection string:
-    - Go to MongoDB Atlas and set up a cluster.
-    - Click on **Get Connection String** to copy the connection details for your project.
+The service handles various A2A task types:
+- Task sending and querying
+- Task subscriptions
+- Push notifications
+- Task cancellations
+- Resubscriptions
 
-2. Use this connection string in your Spring application to connect to MongoDB. Make sure you configure the connection settings properly using **MongoTemplate**.
+Here's a brief overview of the task storage mechanism:
 
-### Running the Application
+```java
+public void ragStorage(String method, Object params) {
+    switch (method) {
+        case "tasks/send":
+            addTask(new ObjectMapper().convertValue(params, TaskSendParams.class));
+            break;
+        case "tasks/get":
+            addTask(new ObjectMapper().convertValue(params, TaskQueryParams.class));
+            break;
+        // Additional task types handled...
+    }
+}
+```## 📸 Visual Guide
 
-1. Clone the repository:
+### 1. Agent Setup
+![Agent Addition](addAgent.png)
+*Adding an A2A agent to your client application*
+
+### 2. Chat Interface
+![Chat Interface](chatanswer.png)
+*Example of normal chat interaction*
+
+### 3. Data Storage
+![MongoDB Storage](mongo.png)
+*Task data stored in MongoDB Atlas*
+
+### 4. Event Monitoring
+![Event Tracking](event.png)
+*Event tracking and monitoring interface*
+
+## 🔍 Using the API
+
+### Task Retrieval Example
+```http
+GET http://localhost:8080/getTask?name="cricket"
+```
+
+This endpoint demonstrates the semantic search capabilities, retrieving tasks related to the given query using vector similarity.
+
+## 🚀 Getting Started
+
+1. Clone the repository
+2. Configure MongoDB Atlas connection in `application.yml`
+3. Set up environment variables:
+   - `DB_USER`
+   - `DB_PASSWORD`
+   - `OPENAI_API_KEY`
+4. Build and run with Maven:
    ```bash
-   git clone <repository-url>
-   cd <project-directory>
+   mvn spring-boot:run
+   ```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
