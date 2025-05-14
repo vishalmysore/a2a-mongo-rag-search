@@ -54,7 +54,9 @@ public void ragStorage(String method, Object params) {
         // Additional task types handled...
     }
 }
-```## 📸 Visual Guide
+```
+
+## 📸 Visual Guide
 
 ### 1. Agent Setup
 ![Agent Addition](addAgent.png)
@@ -78,6 +80,8 @@ public void ragStorage(String method, Object params) {
 ```http
 GET http://localhost:8080/getTask?name="cricket"
 ```
+
+![Event Tracking](retrival.png)
 
 This endpoint demonstrates the semantic search capabilities, retrieving tasks related to the given query using vector similarity.
 
