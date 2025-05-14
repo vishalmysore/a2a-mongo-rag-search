@@ -1,7 +1,8 @@
 # 🤖 Google A2A RAG with Spring, Java, and MongoDB Atlas
 
-This project demonstrates how to build a powerful **Retrieval-Augmented Generation (RAG)** search application that integrates Google's Agent-to-Agent (A2A) protocol with Spring Boot and MongoDB Atlas. The system enables intelligent task management and semantic search capabilities through vector embeddings.
+This project demonstrates how to build a powerful **Retrieval-Augmented Generation (RAG)** search application that integrates Google's Agent-to-Agent (A2A) protocol with Spring Boot and MongoDB Atlas. The system enables intelligent task management and semantic search capabilities through vector embeddings.  
 
+A2AJava is the Java implementation of the Google A2A protocol you can check the project [here](https://github.com/vishalmysore/a2ajava) .  
 ## 🌟 Key Features
 
 - **A2A Protocol Integration**: Seamless communication between AI agents
