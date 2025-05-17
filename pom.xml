@@ -26,11 +26,21 @@
         <dependency>
             <groupId>io.github.vishalmysore</groupId>
             <artifactId>tools4ai</artifactId>
-            <version>1.0.7.5</version>
+            <version>1.0.8</version>
             <exclusions>
+            <!-- Common Swagger/OpenAPI dependencies to exclude -->
                 <exclusion>
                     <groupId>io.swagger.core.v3</groupId>
                     <artifactId>swagger-core</artifactId>
+                </exclusion>
+                <!-- Exclude swagger-core-jakarta -->
+                <exclusion>
+                    <groupId>io.swagger.core.v3</groupId>
+                    <artifactId>swagger-core-jakarta</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.swagger.parser.v3</groupId>
+                    <artifactId>swagger-parser</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -42,19 +52,12 @@
         <dependency>
             <groupId>io.github.vishalmysore</groupId>
             <artifactId>a2ajava</artifactId>
-            <version>0.0.7.7</version>
+            <version>0.0.7.8</version>
         </dependency>
-        <dependency>
-            <groupId>io.github.vishalmysore</groupId>
-            <artifactId>tools4ai</artifactId>
-            <version>1.0.8</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.swagger.core.v3</groupId>
-                    <artifactId>swagger-core</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents.client5/httpclient5 -->
+
+
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver-sync</artifactId>
