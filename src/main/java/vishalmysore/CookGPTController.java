@@ -15,13 +15,13 @@ public class CookGPTController {
    @Autowired
    private CookGPTVectorService vectorService;
 
-    @GetMapping("/getRecipe")
+   // @GetMapping("/getRecipe")
     public List<Document> getRecipe(@RequestParam("name") String name) {
 
         return vectorService.getSimilarDocuments(name);
     }
 
-    @PostMapping("/addRecipe")
+   // @PostMapping("/addRecipe")
     public String addRecipe(@RequestParam("name") String name, @RequestParam("recipe") String recipe) {
         vectorService.addRecipe("recipe for " + name+ " : "+ recipe);
         return "Receipe for " + name + " added successfully!";

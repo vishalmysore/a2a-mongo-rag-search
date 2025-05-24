@@ -74,12 +74,10 @@ public class MCPController extends MCPToolsController {
 //
 //        return ResponseEntity.ok(response);
 
-         CallToolResult result = super.callTool(request, new MCPActionCallback());
+         ResponseEntity<JSONRPCResponse> result = super.callTool(request, new MCPActionCallback());
               log.info("Received result: " + result);
-        JSONRPCResponse response = new JSONRPCResponse();
-        response.setId("133");
-        response.setResult(result);
-        return ResponseEntity.ok(response);
+
+        return result;
        }
 
     @PostMapping("/cancel-notification")

@@ -22,3 +22,5 @@ spring.autoconfigure.exclude:
 logging:
   level:
     org.mongodb.driver.cluster: ERROR
+server:
+  port: 7860

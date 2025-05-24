@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google A2A RAG with Spring, Java, and MongoDB Atlas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 2rem;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background: #eee;
+            padding: 1rem;
+            overflow-x: auto;
+        }
+        code {
+            background: #eee;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        img {
+            max-width: 100%;
+            margin: 1rem 0;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<h1>🤖 Google A2A RAG with Spring, Java, and MongoDB Atlas</h1>
+<p>This project demonstrates how to build a powerful <strong>Retrieval-Augmented Generation (RAG)</strong> search application that integrates Google's Agent-to-Agent (A2A) protocol with Spring Boot and MongoDB Atlas. It is deployed live on Hugging Face at:</p>
+<p><a href="https://vishalmysore-a2amcpmongo.hf.space/" target="_blank">https://vishalmysore-a2amcpmongo.hf.space/</a></p>
+<p>You can discover active agents via:</p>
+<pre><code>https://vishalmysore-a2amcpmongo.hf.space/.well-known/agent.json</code></pre>
+
+<h2>🌟 Key Features</h2>
+<ul>
+    <li><strong>A2A Protocol Integration</strong>: Seamless communication between AI agents</li>
+    <li><strong>Vector-Based Search</strong>: Powered by MongoDB Atlas for semantic task retrieval</li>
+    <li><strong>Real-time Task Storage</strong>: Automatic storage of A2A tasks in vector database</li>
+    <li><strong>RESTful API</strong>: Easy-to-use endpoints for task management</li>
+    <li><strong>Spring Boot Framework</strong>: Built with enterprise-grade Java technology</li>
+    <li><strong>Extensible Architecture</strong>: Adaptable for various use cases</li>
+</ul>
+
+<h2>🛠️ Technology Stack</h2>
+<ul>
+    <li><strong>Backend</strong>: Spring Boot 3.x</li>
+    <li><strong>Database</strong>: MongoDB Atlas with Vector Search</li>
+    <li><strong>Protocol</strong>: Google A2A (Agent-to-Agent)</li>
+    <li><strong>Search</strong>: Vector-based semantic search</li>
+    <li><strong>API Documentation</strong>: OpenAPI/Swagger</li>
+</ul>
+<img src="architecture.png" alt="Architecture">
+
+<h2>📝 How It Works</h2>
+<h3>Vector Storage Integration</h3>
+<pre><code>@Override
+public void preProcessing(String method, Object params) {
+    vectorService.ragStorage(method, params);
+}</code></pre>
+
+<h3>Task Management</h3>
+<pre><code>public void ragStorage(String method, Object params) {
+    switch (method) {
+        case "tasks/send":
+            addTask(new ObjectMapper().convertValue(params, TaskSendParams.class));
+            break;
+        case "tasks/get":
+            addTask(new ObjectMapper().convertValue(params, TaskQueryParams.class));
+            break;
+    }
+}</code></pre>
+
+<h2>📸 Visual Guide</h2>
+<h3>1. Agent Setup</h3>
+<img src="addAgent.png" alt="Agent Addition">
+<h3>2. Chat Interface</h3>
+<img src="chatanswer.png" alt="Chat Interface">
+<h3>3. Data Storage</h3>
+<img src="mongo.png" alt="MongoDB Storage">
+<h3>4. Event Monitoring</h3>
+<img src="event.png" alt="Event Tracking">
+
+<h2>🔍 Using the API</h2>
+<h3>Task Retrieval Example</h3>
+<pre><code>GET https://vishalmysore-a2amcpmongo.hf.space/getTask?name="cricket"</code></pre>
+<img src="retrival.png" alt="Task Retrieval">
+
+<h3>🧺 Laundry Machine Agent Curl Commands</h3>
+
+<pre><code># Start Washing
+curl -u user:password -H "Content-Type: application/json" -d '{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "startWashing",
+    "arguments": {
+      "provideAllValuesInPlainEnglish": {}
+    }
+  },
+  "id": 1
+}' https://vishalmysore-a2amcpmongo.hf.space/
+
+# Stop Washing
+curl -u user:password -H "Content-Type: application/json" -d '{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "stopWashing",
+    "arguments": {
+      "provideAllValuesInPlainEnglish": {}
+    }
+  },
+  "id": 2
+}' https://vishalmysore-a2amcpmongo.hf.space/
+
+# Set Temperature to 40
+curl -u user:password -H "Content-Type: application/json" -d '{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "setTemperature",
+    "arguments": {
+      "provideAllValuesInPlainEnglish": {
+        "arg0": 40
+      }
+    }
+  },
+  "id": 3
+}' https://vishalmysore-a2amcpmongo.hf.space/
+
+# Set Cycle Type to 'delicate'
+curl -u user:password -H "Content-Type: application/json" -d '{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "setCycleType",
+    "arguments": {
+      "provideAllValuesInPlainEnglish": {
+        "arg0": "delicate"
+      }
+    }
+  },
+  "id": 4
+}' https://vishalmysore-a2amcpmongo.hf.space/
+
+# Get Quote for Laundry
+curl -u user:password -H "Content-Type: application/json" -d '{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "getQuoteForLaundry",
+    "arguments": {
+      "provideAllValuesInPlainEnglish": {
+        "arg0": "cotton",
+        "arg1": "3kg"
+      }
+    }
+  },
+  "id": 5
+}' https://vishalmysore-a2amcpmongo.hf.space/
+
+# Get Machine Status
+curl -u user:password -H "Content-Type: application/json" -d '{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "getStatus",
+    "arguments": {
+      "provideAllValuesInPlainEnglish": {}
+    }
+  },
+  "id": 6
+}' https://vishalmysore-a2amcpmongo.hf.space/
+</code></pre>
+
+<h2>🚀 Getting Started</h2>
+<ol>
+    <li>Clone the repository</li>
+    <li>Configure MongoDB Atlas connection in <code>application.yml</code></li>
+    <li>Set up environment variables:
+        <ul>
+            <li><code>DB_USER</code></li>
+            <li><code>DB_PASSWORD</code></li>
+            <li><code>OPENAI_API_KEY</code></li>
+        </ul>
+    </li>
+    <li>Build and run with Maven:
+        <pre><code>mvn spring-boot:run</code></pre>
+    </li>
+</ol>
+
+<h2>📄 License</h2>
+<p>This project is licensed under the MIT License - see the LICENSE file for details.</p>
+
+<h2>🤝 Contributing</h2>
+<p>Contributions are welcome! Please feel free to submit a Pull Request.</p>
+</body>
+</html>

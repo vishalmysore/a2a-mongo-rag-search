@@ -3,13 +3,12 @@ package vishalmysore;
 
 import io.github.vishalmysore.a2a.domain.JsonRpcRequest;
 import io.github.vishalmysore.a2a.server.A2ATaskController;
-import io.github.vishalmysore.a2a.server.JsonRpcController;
+
+import io.github.vishalmysore.common.server.JsonRpcController;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 /** Expose the Json-RPC endpoint for the tasks
  *  This will handle all the JSON RPC Requests for a2a such as
@@ -37,7 +36,10 @@ public class MyRpCController extends JsonRpcController {
         super.postProcessing(method, params);
     }
 
-
+    @GetMapping
+    public ModelAndView forwardToIndex() {
+        return new ModelAndView("forward:/index.html");
+    }
 
     @PostMapping
     public Object handleRpc(@RequestBody JsonRpcRequest request) {
