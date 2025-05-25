@@ -74,8 +74,14 @@ public class A2ARagService {
                 TaskResubscriptionParams resubParams = new ObjectMapper().convertValue(params, TaskResubscriptionParams.class);
                 addTask(resubParams);
                 break;
+            case "tools/list":
+                break;
+            case "resources/list":
+                break;
+            case "tools/call":
+                addTask(params);
             default:
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Method not found: " + method);
+                break;
         }
     }
 

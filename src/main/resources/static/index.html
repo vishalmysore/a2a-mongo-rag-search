@@ -91,14 +91,34 @@ public void preProcessing(String method, Object params) {
 <img src="event.png" alt="Event Tracking">
 
 <h2>🔍 Using the API</h2>
+
+<h3>Swagger</h3>
+<pre>https://vishalmysore-a2amcpmongo.hf.space/swagger-ui/index.html</pre>
+
 <h3>Task Retrieval Example</h3>
-<pre><code>GET https://vishalmysore-a2amcpmongo.hf.space/getTask?name="cricket"</code></pre>
+<pre><code>GET https://vishalmysore-a2amcpmongo.hf.space/taskText?name="cricket"</code></pre>
 <img src="retrival.png" alt="Task Retrieval">
 
-<h3>🧺 Laundry Machine Agent Curl Commands</h3>
+<h3> A2A Curl </h3>
+
+curl -H "Content-Type: application/json" -d {"id": "adk-342d4575-992d-40ce-a375-55081b3744cd", "args": {"agent_name": "LaundryAssistant", "message": "wash my golf clothes and make them really shiny"}, "name": "send_task"}
+
+
+<h3>🧺 Laundry Machine Agent Curl Commands for Claude</h3>
+<pre><code># List Tool
+curl -H "Content-Type: application/json" -d '{
+"jsonrpc": "2.0",
+"method": "tools/list",
+"params": {
+
+}
+},
+"id": 1
+}' https://vishalmysore-a2amcpmongo.hf.space/
+</code></pre>
 
 <pre><code># Start Washing
-curl -u user:password -H "Content-Type: application/json" -d '{
+curl -H "Content-Type: application/json" -d '{
   "jsonrpc": "2.0",
   "method": "tools/call",
   "params": {
@@ -111,7 +131,7 @@ curl -u user:password -H "Content-Type: application/json" -d '{
 }' https://vishalmysore-a2amcpmongo.hf.space/
 
 # Stop Washing
-curl -u user:password -H "Content-Type: application/json" -d '{
+curl  -H "Content-Type: application/json" -d '{
   "jsonrpc": "2.0",
   "method": "tools/call",
   "params": {
@@ -124,7 +144,7 @@ curl -u user:password -H "Content-Type: application/json" -d '{
 }' https://vishalmysore-a2amcpmongo.hf.space/
 
 # Set Temperature to 40
-curl -u user:password -H "Content-Type: application/json" -d '{
+curl -H "Content-Type: application/json" -d '{
   "jsonrpc": "2.0",
   "method": "tools/call",
   "params": {

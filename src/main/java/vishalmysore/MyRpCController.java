@@ -5,8 +5,11 @@ import io.github.vishalmysore.a2a.domain.JsonRpcRequest;
 import io.github.vishalmysore.a2a.server.A2ATaskController;
 
 import io.github.vishalmysore.common.server.JsonRpcController;
+import io.github.vishalmysore.common.server.SpringAwareJSONRpcController;
+import io.github.vishalmysore.mcp.server.MCPToolsController;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,10 +24,17 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 @RequestMapping("/")
 @Log
-public class MyRpCController extends JsonRpcController {
+public class MyRpCController extends SpringAwareJSONRpcController {
 
     @Autowired
+    MCPController mcpController;
+    @Autowired
     private A2ARagService vectorService;
+    @Autowired
+    public MyRpCController(ApplicationContext applicationContext) {
+        super(applicationContext);
+
+    }
 
     @Override
     public void preProcessing(String method, Object params) {
@@ -54,5 +64,10 @@ public class MyRpCController extends JsonRpcController {
     @Override
     public A2ATaskController getTaskController() {
         return new MyA2ATaskController();
+    }
+
+    @Override
+    public MCPToolsController getMCPToolsController() {
+        return mcpController;
     }
 }
