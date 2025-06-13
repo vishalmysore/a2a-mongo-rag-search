@@ -15,8 +15,9 @@ public class LaundryMachine {
     private int temperature = 30;
     private String cycleType = "normal";
     @Action(description = "Start the washing machine")
-    public void startWashing() {
+    public String startWashing() {
         log.info("Washing started");
+        return "Washing machine started";
     }
 
     @Action(description = "get quote for laundry")
@@ -29,12 +30,13 @@ public class LaundryMachine {
     }
 
     @Action(description = "Stop the washing machine")
-    public void stopWashing() {
+    public String stopWashing() {
         isRunning = false;
         log.info("Washing stopped");
         if(callback != null) {
             callback.sendtStatus("Washing machine stopped", ActionState.COMPLETED);
         }
+        return "Washing machine stopped";
     }
 
     @Action(description = "Set washing temperature")
